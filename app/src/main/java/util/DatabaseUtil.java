@@ -30,7 +30,13 @@ public class DatabaseUtil {
                 "id_libro INT," +
                 "FOREIGN KEY (persona_dni) REFERENCES persona(dni)," +
                 "FOREIGN KEY (id_libro) REFERENCES libro(numero));";
-
+        String initSqlPrestamoLibro = "CREATE TABLE IF NOT EXISTS prestamo_libro("
+                + "idPrestamo INT,"
+                + "numeroLibro INT,"
+                + "PRIMARY KEY (idPrestamo,idLibro,"
+                + "FOREIGN KEY(idPrestamo) REFERENCES persona(dni),"
+                + "FOREIGN KEY(numeroLibro) REFERENCES libro(numero);"
+                + ")";
 
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(initSqlPersona);

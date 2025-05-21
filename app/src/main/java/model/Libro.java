@@ -1,24 +1,27 @@
 package model;
 
+@SuppressWarnings("ALL")
 public class Libro {
+    public int numero;
     public String titulo;
     public String clasificacion;
-    public int numero;
-    public Prestamo prestado;
+    
 
     public Libro() {
     }
 
-    public Libro(String titulo, String clasificacion, int numero) {
+    public Libro(int numero,String titulo, String clasificacion) {
         this.titulo = titulo;
         this.clasificacion = clasificacion;
         this.numero = numero;
     }
 
-    public Libro(String titulo, String clasificacion, int numero, Prestamo prestado) {
-        this.titulo = titulo;
-        this.clasificacion = clasificacion;
-        this.numero = numero;
-        this.prestado = prestado;
+    @Override
+    public String toString() {
+        return "\n\tnumero = " + numero+
+                "\n\ttitulo = " + titulo +
+                "\n\tclasificacion=" +clasificacion;
     }
+    
+    
 }

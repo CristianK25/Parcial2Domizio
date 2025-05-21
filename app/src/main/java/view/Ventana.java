@@ -2,6 +2,8 @@
 package view;
 
 import dao.LibroDAO;
+import dao.PersonaDAO;
+import dao.PrestamoDAO;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.sql.Connection;
@@ -10,6 +12,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import model.Libro;
+import model.Persona;
+import model.Prestamo;
 
 
 public class Ventana extends javax.swing.JFrame {
@@ -48,15 +53,15 @@ public class Ventana extends javax.swing.JFrame {
         scrollPanePrestamos = new javax.swing.JScrollPane();
         txtaPrestamos = new javax.swing.JTextArea();
         btnVolverMenu = new javax.swing.JButton();
-        panelMenuPrincipal = new javax.swing.JPanel();
-        lblTitulo = new javax.swing.JLabel();
-        btnPedirPrestamos = new javax.swing.JButton();
-        btnMostrarPrestamos = new javax.swing.JButton();
         panelLibros = new javax.swing.JPanel();
         scrollPaneLibros = new javax.swing.JScrollPane();
         panelCheckboxes = new javax.swing.JPanel();
         lblEleccionLibros = new javax.swing.JLabel();
         btnEleccionLibros = new javax.swing.JButton();
+        panelMenuPrincipal = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        btnPedirPrestamos = new javax.swing.JButton();
+        btnMostrarPrestamos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,6 +179,62 @@ public class Ventana extends javax.swing.JFrame {
 
         panelPrincipal.add(panelMostrarPrestamos, "panelMostrarPrestamos");
 
+        javax.swing.GroupLayout panelCheckboxesLayout = new javax.swing.GroupLayout(panelCheckboxes);
+        panelCheckboxes.setLayout(panelCheckboxesLayout);
+        panelCheckboxesLayout.setHorizontalGroup(
+            panelCheckboxesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 286, Short.MAX_VALUE)
+        );
+        panelCheckboxesLayout.setVerticalGroup(
+            panelCheckboxesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 175, Short.MAX_VALUE)
+        );
+
+        scrollPaneLibros.setViewportView(panelCheckboxes);
+
+        lblEleccionLibros.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lblEleccionLibros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEleccionLibros.setText("Elige los libros");
+
+        btnEleccionLibros.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnEleccionLibros.setText("Eleccion");
+        btnEleccionLibros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEleccionLibrosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelLibrosLayout = new javax.swing.GroupLayout(panelLibros);
+        panelLibros.setLayout(panelLibrosLayout);
+        panelLibrosLayout.setHorizontalGroup(
+            panelLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLibrosLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(lblEleccionLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLibrosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(scrollPaneLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelLibrosLayout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addComponent(btnEleccionLibros)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelLibrosLayout.setVerticalGroup(
+            panelLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLibrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblEleccionLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(scrollPaneLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(btnEleccionLibros)
+                .addContainerGap())
+        );
+
+        panelPrincipal.add(panelLibros, "panelLibros");
+
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Prestamos de Libros");
@@ -220,57 +281,6 @@ public class Ventana extends javax.swing.JFrame {
 
         panelPrincipal.add(panelMenuPrincipal, "panelMenuPrincipal");
 
-        javax.swing.GroupLayout panelCheckboxesLayout = new javax.swing.GroupLayout(panelCheckboxes);
-        panelCheckboxes.setLayout(panelCheckboxesLayout);
-        panelCheckboxesLayout.setHorizontalGroup(
-            panelCheckboxesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
-        );
-        panelCheckboxesLayout.setVerticalGroup(
-            panelCheckboxesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 175, Short.MAX_VALUE)
-        );
-
-        scrollPaneLibros.setViewportView(panelCheckboxes);
-
-        lblEleccionLibros.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        lblEleccionLibros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEleccionLibros.setText("Elige los libros");
-
-        btnEleccionLibros.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        btnEleccionLibros.setText("Eleccion");
-
-        javax.swing.GroupLayout panelLibrosLayout = new javax.swing.GroupLayout(panelLibros);
-        panelLibros.setLayout(panelLibrosLayout);
-        panelLibrosLayout.setHorizontalGroup(
-            panelLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLibrosLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(lblEleccionLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLibrosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scrollPaneLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelLibrosLayout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(btnEleccionLibros)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelLibrosLayout.setVerticalGroup(
-            panelLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLibrosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblEleccionLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(scrollPaneLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(btnEleccionLibros)
-                .addContainerGap())
-        );
-
-        panelPrincipal.add(panelLibros, "panelLibros");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -300,7 +310,7 @@ public class Ventana extends javax.swing.JFrame {
             }
             try{
                 int dni = Integer.parseInt(input.trim());
-                
+                mostrarPrestamos(dni);
                 this.cl.show(this.panelPrincipal,"panelMostrarPrestamos");
                 break;
             }catch(NumberFormatException e){
@@ -318,21 +328,30 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        if(this.txtDNI.getText().isEmpty() || this.txtNombre.getText().isEmpty())return;
+        try{
+            int dni = Integer.parseInt(this.txtDNI.getText());
+            String nombre = this.txtNombre.getText();
+            PersonaDAO.insertarPersona(conn,new Persona(dni, nombre));
+        }catch(NumberFormatException e){
+            System.out.println("El dni tiene que ser un numero");
+        }
         this.cl.show(this.panelPrincipal,"panelLibros");
     }//GEN-LAST:event_btnIngresarActionPerformed
 
-    private void cargarLibrosPanel(){
-        ArrayList<String> libros = LibroDAO.buscarNombreLibro(this.conn);
-        this.panelCheckboxes.setLayout(new BoxLayout(panelCheckboxes,BoxLayout.Y_AXIS));
-        for(String libro: libros){
-            JCheckBox jcb = new JCheckBox(libro);
-            jcb.setAlignmentX(Component.LEFT_ALIGNMENT);
-            this.panelCheckboxes.add(jcb);
-            this.panelCheckboxes.add(Box.createVerticalStrut(5)); // Separación de 5px
+    private void btnEleccionLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEleccionLibrosActionPerformed
+        ArrayList<Libro> librosSeleccionados = new ArrayList<>();
+        for (Component comp : this.panelCheckboxes.getComponents()){
+            if(comp instanceof JCheckBox chbx){
+                if(chbx.isSelected()){
+                    Libro libro = LibroDAO.buscarLibroPorNombre(conn,chbx.getName());
+                    librosSeleccionados.add(libro);
+                }
+            }
         }
-        panelCheckboxes.revalidate(); // Recalcula el layout
-        panelCheckboxes.repaint();    // Redibuja el panel
-    }
+    }//GEN-LAST:event_btnEleccionLibrosActionPerformed
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEleccionLibros;
@@ -359,4 +378,22 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextArea txtaPrestamos;
     // End of variables declaration//GEN-END:variables
 
+    private void mostrarPrestamos(int dni) {
+        this.txtaPrestamos.setText("");
+        Prestamo p = PrestamoDAO.buscarPrestamoPorDni(conn, dni);
+        this.txtaPrestamos.setText(p.toString());
+    }
+    
+    private void cargarLibrosPanel(){
+        ArrayList<String> libros = LibroDAO.buscarNombreLibro(this.conn);
+        this.panelCheckboxes.setLayout(new BoxLayout(panelCheckboxes,BoxLayout.Y_AXIS));
+        for(String libro: libros){
+            JCheckBox jcb = new JCheckBox(libro);
+            jcb.setAlignmentX(Component.LEFT_ALIGNMENT);
+            this.panelCheckboxes.add(jcb);
+            this.panelCheckboxes.add(Box.createVerticalStrut(5)); // Separación de 5px
+        }
+        panelCheckboxes.revalidate(); // Recalcula el layout
+        panelCheckboxes.repaint();    // Redibuja el panel
+    }
 }

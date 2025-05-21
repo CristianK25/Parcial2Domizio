@@ -26,7 +26,7 @@ public class LibroDAO {
             ps.setInt(1,numero);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                return new Libro(rs.getString("titulo"),rs.getString("clasificacion"),rs.getInt("numero"));
+                return new Libro(rs.getInt("numero"),rs.getString("titulo"),rs.getString("clasificacion"));
             }
             else{
                 return null;
@@ -45,7 +45,7 @@ public class LibroDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()){
-                return new Libro(rs.getString("titulo"),rs.getString("clasificacion"),rs.getInt("numero"));
+                return new Libro(rs.getInt("numero"),rs.getString("titulo"),rs.getString("clasificacion"));
             }
             else{
                 return null;

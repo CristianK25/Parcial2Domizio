@@ -9,12 +9,13 @@ import java.sql.SQLException;
 @SuppressWarnings("ALL")
 public class PrestamoDAO {
     public static void insertarPrestamo(Connection conn, Prestamo prestamo){
-        String sql = "INSERT INTO prestamo (dia_prestamo,devolucion,persona_dni) VALUES (?,?,?)";
+        String sql = "INSERT INTO prestamo (dia_prestamo,devolucion,persona_dni,id_libro) VALUES (?,?,?,?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setDate(1,new java.sql.Date(prestamo.dia_prestamo.getTime()));
             ps.setDate(2,new java.sql.Date(prestamo.devolucion.getTime()));
             ps.setInt(3,prestamo.socio.dni);
+//            ps.setInt(4,);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Error al insertar libros");

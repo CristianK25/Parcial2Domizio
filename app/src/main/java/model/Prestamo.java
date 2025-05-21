@@ -46,12 +46,12 @@ public class Prestamo {
     @Override
     public String toString() {
         return "Prestamo{" +
-                "\nnumero = " + numero +
-                "\ndia_prestamo = " + dia_prestamo +
-                "\ndevolucion = " + devolucion +
-                "\nsocio = " + socio +
-                "\nlibrosEscritos = " + librosEscritos +
-                '}';
+                "\nNumero Prestamo= " + numero +
+                "\nDia Prestamo = " + dia_prestamo +
+                "\nDia de Devolucion = " + devolucion +
+                "\nSocio = " + socio +
+                "\nLibros Escritos = " + librosEscritos +
+                "\n}";
     }
 
 
