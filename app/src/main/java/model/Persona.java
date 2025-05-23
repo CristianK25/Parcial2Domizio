@@ -14,8 +14,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "\n\tdni = " + dni +
-                "\n\tnombre = '" + nombre + '\'' +
-                '}';
+        return "\n\tDNI = " + dni +
+                "\n\tNombre = '" + nombre + '\'';
     }
 }

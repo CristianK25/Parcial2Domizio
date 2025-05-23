@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Prestamo {
-    public int numero;
+    public int id;
     public Date dia_prestamo;
     public Date devolucion;
     public Persona socio;
@@ -24,33 +24,49 @@ public class Prestamo {
 
     }
 
-    public Prestamo(int numero, Date dia_prestamo, Date devolucion) {
-        this.numero = numero;
+    public Prestamo(Date dia_prestamo, Date devolucion) {
         this.dia_prestamo = dia_prestamo;
         this.devolucion = devolucion;
         this.librosEscritos = new ArrayList<>();
     }
 
-    public Prestamo(int numero, Date dia_prestamo, Date devolucion, Persona socio) {
-        this.numero = numero;
+    public Prestamo(int id,Date dia_prestamo, Date devolucion, Persona socio) {
+        this.id = id;
         this.dia_prestamo = dia_prestamo;
         this.devolucion = devolucion;
         this.socio = socio;
         this.librosEscritos = new ArrayList<>();
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setSocio(Persona socio) {
+        this.socio = socio;
+    }
+
+    public void setLibrosEscritos(ArrayList<Libro> librosEscritos) {
+        this.librosEscritos = librosEscritos;
+    }
+    
+    
+    
     public void agregarLibro(Libro libro){
         this.librosEscritos.add(libro);
     }
 
     @Override
     public String toString() {
-        return "Prestamo{" +
-                "\nNumero Prestamo= " + numero +
+        String totalLibrosEscritos = "\n";
+        for (Libro l: this.librosEscritos){
+            totalLibrosEscritos+= l.toString()+"\n\t------------------";
+        }
+        return "\nNumero Prestamo = " + id +
                 "\nDia Prestamo = " + dia_prestamo +
                 "\nDia de Devolucion = " + devolucion +
                 "\nSocio = " + socio +
-                "\nLibros Escritos = " + librosEscritos +
+                "\nLibros Escritos = {" + totalLibrosEscritos +
                 "\n}";
     }
 

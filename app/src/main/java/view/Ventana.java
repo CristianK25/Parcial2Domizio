@@ -21,6 +21,9 @@ public class Ventana extends javax.swing.JFrame {
 
     private CardLayout cl;
     private Connection conn;
+    Persona persona; //Variables temporales para crear en el momento
+    Prestamo prestamo;
+    
     /** Creates new form Ventana
      * @param conn */
     public Ventana(Connection conn) {
@@ -299,6 +302,12 @@ public class Ventana extends javax.swing.JFrame {
         this.cl.show(this.panelPrincipal,"panelNombreDni");
     }//GEN-LAST:event_btnPedirPrestamosActionPerformed
 
+    /**
+     * Metodo del boton que revisa si el dni ingresado es un entero. De ser asi
+     * se llama al metodo mostrarPrestamos que se encarga de imprimirlos en pantalla.
+     * Por ultimo cambia el panelPrincipal para mostrar el panel donde se imprimen los prestamos
+     * @param evt 
+     */
     private void btnMostrarPrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarPrestamosActionPerformed
         while(true){
             String input = JOptionPane.showInputDialog("Ingrese su DNI:");
@@ -319,6 +328,22 @@ public class Ventana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnMostrarPrestamosActionPerformed
 
+    /**
+     * Muestra en el JTextArea del panelMostrarPrestamos, el metodo toString de el prestamo
+     * que realizo la persona con el dni ingresado.
+     * @param dni - dni de la persona 
+     */
+    private void mostrarPrestamos(int dni) {
+        this.txtaPrestamos.setText("");
+        Prestamo p = PrestamoDAO.buscarPrestamoPorDni(conn, dni);
+        // Debug adicional
+        if(p != null) {
+            System.out.println("Préstamo encontrado ID: " + p.id);
+            System.out.println("Número de libros: " + (p.librosEscritos != null ? p.librosEscritos.size() : 0));
+        }
+        this.txtaPrestamos.setText(p.toString());
+    }
+    
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         this.cl.show(this.panelPrincipal,"panelMenuPrincipal");
     }//GEN-LAST:event_btnVolverActionPerformed
@@ -327,28 +352,51 @@ public class Ventana extends javax.swing.JFrame {
         this.cl.show(this.panelPrincipal,"panelMenuPrincipal");
     }//GEN-LAST:event_btnVolverMenuActionPerformed
 
+    /**
+     * Metodo para insertar la persona ingresada. Verifica si los campos no estan vacios.
+     * Inserta una persona a la base de datos siempre y cuando no exista en la base de datos
+     * anteriormente. 
+     * @param evt 
+     */
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         if(this.txtDNI.getText().isEmpty() || this.txtNombre.getText().isEmpty())return;
         try{
             int dni = Integer.parseInt(this.txtDNI.getText());
             String nombre = this.txtNombre.getText();
-            PersonaDAO.insertarPersona(conn,new Persona(dni, nombre));
+            if ( PersonaDAO.existeDni(conn, dni)){
+                JOptionPane.showMessageDialog(null, "Esa persona ya existe");
+                return;
+            }
+            this.persona = new Persona(dni,nombre);
+            PersonaDAO.insertarPersona(conn,this.persona);
+            this.prestamo = new Prestamo();
+            this.prestamo.setSocio(persona);
         }catch(NumberFormatException e){
             System.out.println("El dni tiene que ser un numero");
         }
         this.cl.show(this.panelPrincipal,"panelLibros");
+        this.txtDNI.setText("");
+        this.txtNombre.setText("");
     }//GEN-LAST:event_btnIngresarActionPerformed
 
+    /**
+     * Verifica cuales JCheckbox fueron seleccionados, creando un arreglo de libros
+     * que luego seran insertados en el objeto Prestamo que fue creado en btnIngresarActionPerformed
+     * @param evt 
+     */
     private void btnEleccionLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEleccionLibrosActionPerformed
-        ArrayList<Libro> librosSeleccionados = new ArrayList<>();
         for (Component comp : this.panelCheckboxes.getComponents()){
             if(comp instanceof JCheckBox chbx){
                 if(chbx.isSelected()){
-                    Libro libro = LibroDAO.buscarLibroPorNombre(conn,chbx.getName());
-                    librosSeleccionados.add(libro);
+                    Libro libro = LibroDAO.buscarLibroPorNombre(conn,chbx.getText());
+                    if (libro != null) { // Verificar que el libro existe
+                    this.prestamo.agregarLibro(libro);}
                 }
             }
         }
+        PrestamoDAO.insertarPrestamo(conn, prestamo);
+        System.out.println("DEBUG: ID del préstamo después de insertar: " + prestamo.id);
+        this.cl.show(this.panelPrincipal, "panelMenuPrincipal");
     }//GEN-LAST:event_btnEleccionLibrosActionPerformed
 
 
@@ -378,12 +426,9 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextArea txtaPrestamos;
     // End of variables declaration//GEN-END:variables
 
-    private void mostrarPrestamos(int dni) {
-        this.txtaPrestamos.setText("");
-        Prestamo p = PrestamoDAO.buscarPrestamoPorDni(conn, dni);
-        this.txtaPrestamos.setText(p.toString());
-    }
-    
+    /**
+     * Muestra en el nombre de los libros que hay en la base de datos en forma de JCheckbox.
+     */
     private void cargarLibrosPanel(){
         ArrayList<String> libros = LibroDAO.buscarNombreLibro(this.conn);
         this.panelCheckboxes.setLayout(new BoxLayout(panelCheckboxes,BoxLayout.Y_AXIS));

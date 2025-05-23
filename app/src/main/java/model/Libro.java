@@ -18,9 +18,9 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "\n\tnumero = " + numero+
-                "\n\ttitulo = " + titulo +
-                "\n\tclasificacion=" +clasificacion;
+        return "\n\tNumero = " + numero+
+                "\n\tTitulo = " + titulo +
+                "\n\tClasificacion = " +clasificacion;
     }
     
     
