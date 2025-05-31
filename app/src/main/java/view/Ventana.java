@@ -43,6 +43,7 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         panelPrincipal = new javax.swing.JPanel();
         panelNombreDni = new javax.swing.JPanel();
         txtNombre = new javax.swing.JTextField();
@@ -65,6 +66,8 @@ public class Ventana extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         btnPedirPrestamos = new javax.swing.JButton();
         btnMostrarPrestamos = new javax.swing.JButton();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -408,6 +411,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btnPedirPrestamos;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton btnVolverMenu;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel lblDni;
     private javax.swing.JLabel lblEleccionLibros;
     private javax.swing.JLabel lblNombre;
@@ -432,8 +436,8 @@ public class Ventana extends javax.swing.JFrame {
     private void cargarLibrosPanel(){
         ArrayList<String> libros = LibroDAO.buscarNombreLibro(this.conn);
         this.panelCheckboxes.setLayout(new BoxLayout(panelCheckboxes,BoxLayout.Y_AXIS));
-        for(String libro: libros){
-            JCheckBox jcb = new JCheckBox(libro);
+        for(String tituloLibro: libros){
+            JCheckBox jcb = new JCheckBox(tituloLibro);
             jcb.setAlignmentX(Component.LEFT_ALIGNMENT);
             this.panelCheckboxes.add(jcb);
             this.panelCheckboxes.add(Box.createVerticalStrut(5)); // Separación de 5px

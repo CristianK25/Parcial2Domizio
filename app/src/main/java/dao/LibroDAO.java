@@ -69,7 +69,7 @@ public class LibroDAO {
         } catch (SQLException e) {
             System.out.println("Error al buscar titulos del libros");
             return null;
-        }
+        } 
     }
 
 }

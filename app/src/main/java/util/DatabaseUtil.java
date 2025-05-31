@@ -68,14 +68,14 @@ public class DatabaseUtil {
 
     String sql = "INSERT IGNORE INTO libro (numero, titulo, clasificacion) VALUES (?, ?, ?)";
 
-    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
         for (String[] libro : librosAInsertar) {
-            pstmt.setInt(1, Integer.parseInt(libro[0]));  // numero
-            pstmt.setString(2, libro[1]);  // titulo
-            pstmt.setString(3, libro[2]);  // clasificacion
-            pstmt.addBatch();
+            ps.setInt(1, Integer.parseInt(libro[0]));  // numero
+            ps.setString(2, libro[1]);  // titulo
+            ps.setString(3, libro[2]);  // clasificacion
+            ps.addBatch();
         }
-        pstmt.executeBatch();
+        ps.executeBatch();
         System.out.println("Libros de ejemplo insertados correctamente.");
     } catch (SQLException e) {
         System.out.println("Error al insertar libros de ejemplo: " + e.getMessage());
