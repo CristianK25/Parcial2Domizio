@@ -365,6 +365,7 @@ public class Ventana extends javax.swing.JFrame {
         if(this.txtDNI.getText().isEmpty() || this.txtNombre.getText().isEmpty())return;
         try{
             int dni = Integer.parseInt(this.txtDNI.getText());
+            
             String nombre = this.txtNombre.getText();
             if ( PersonaDAO.existeDni(conn, dni)){
                 JOptionPane.showMessageDialog(null, "Esa persona ya existe");
@@ -398,7 +399,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         }
         PrestamoDAO.insertarPrestamo(conn, prestamo);
-        System.out.println("DEBUG: ID del préstamo después de insertar: " + prestamo.id);
+        JOptionPane.showMessageDialog(null, "Prestamo ingresado correctamente");
         this.cl.show(this.panelPrincipal, "panelMenuPrincipal");
     }//GEN-LAST:event_btnEleccionLibrosActionPerformed
 
