@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 repositories {
@@ -27,6 +28,8 @@ dependencies {
     implementation 'com.formdev:flatlaf:3.4'
     implementation 'com.formdev:flatlaf-intellij-themes:3.5.1'
     implementation("mysql:mysql-connector-java:8.0.33") //mysql
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -44,4 +47,13 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+shadowJar {
+    archiveBaseName.set('Parcial2Domizio')
+    archiveVersion.set('1.0')
+    archiveClassifier.set('')
+    manifest {
+        attributes 'Main-Class': application.mainClass
+    }
 }

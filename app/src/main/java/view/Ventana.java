@@ -66,6 +66,7 @@ public class Ventana extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         btnPedirPrestamos = new javax.swing.JButton();
         btnMostrarPrestamos = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -78,9 +79,11 @@ public class Ventana extends javax.swing.JFrame {
         txtDNI.setColumns(15);
 
         lblDni.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        lblDni.setForeground(new java.awt.Color(255, 255, 255));
         lblDni.setText("DNI:");
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("Nombre:");
 
         lblTituloIngresoDatos.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
@@ -88,6 +91,7 @@ public class Ventana extends javax.swing.JFrame {
         lblTituloIngresoDatos.setText("Ingrese sus datos");
 
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +100,7 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         btnVolver.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,6 +158,7 @@ public class Ventana extends javax.swing.JFrame {
         scrollPanePrestamos.setViewportView(txtaPrestamos);
 
         btnVolverMenu.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnVolverMenu.setForeground(new java.awt.Color(255, 255, 255));
         btnVolverMenu.setText("Volver al Menu Principal");
         btnVolverMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +191,8 @@ public class Ventana extends javax.swing.JFrame {
 
         panelPrincipal.add(panelMostrarPrestamos, "panelMostrarPrestamos");
 
+        panelLibros.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout panelCheckboxesLayout = new javax.swing.GroupLayout(panelCheckboxes);
         panelCheckboxes.setLayout(panelCheckboxesLayout);
         panelCheckboxesLayout.setHorizontalGroup(
@@ -203,6 +211,7 @@ public class Ventana extends javax.swing.JFrame {
         lblEleccionLibros.setText("Elige los libros");
 
         btnEleccionLibros.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnEleccionLibros.setForeground(new java.awt.Color(255, 255, 255));
         btnEleccionLibros.setText("Eleccion");
         btnEleccionLibros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,10 +250,15 @@ public class Ventana extends javax.swing.JFrame {
 
         panelPrincipal.add(panelLibros, "panelLibros");
 
+        panelMenuPrincipal.setForeground(new java.awt.Color(255, 255, 255));
+
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Prestamos de Libros");
 
+        btnPedirPrestamos.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnPedirPrestamos.setForeground(new java.awt.Color(255, 255, 255));
         btnPedirPrestamos.setText("Pedir Prestamos");
         btnPedirPrestamos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,6 +266,8 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        btnMostrarPrestamos.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnMostrarPrestamos.setForeground(new java.awt.Color(255, 255, 255));
         btnMostrarPrestamos.setText("Mostrar Prestamos");
         btnMostrarPrestamos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,22 +279,26 @@ public class Ventana extends javax.swing.JFrame {
         panelMenuPrincipal.setLayout(panelMenuPrincipalLayout);
         panelMenuPrincipalLayout.setHorizontalGroup(
             panelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuPrincipalLayout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addComponent(btnPedirPrestamos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMostrarPrestamos)
+                .addGap(50, 50, 50))
+            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelMenuPrincipalLayout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
-                .addGroup(panelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelMenuPrincipalLayout.createSequentialGroup()
-                        .addComponent(btnPedirPrestamos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMostrarPrestamos))
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60))
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addContainerGap())
         );
         panelMenuPrincipalLayout.setVerticalGroup(
             panelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMenuPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81)
                 .addGroup(panelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPedirPrestamos)
                     .addComponent(btnMostrarPrestamos))
@@ -395,6 +415,7 @@ public class Ventana extends javax.swing.JFrame {
                     Libro libro = LibroDAO.buscarLibroPorNombre(conn,chbx.getText());
                     if (libro != null) { // Verificar que el libro existe
                     this.prestamo.agregarLibro(libro);}
+                    chbx.setSelected(false);
                 }
             }
         }
@@ -413,6 +434,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton btnVolverMenu;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblDni;
     private javax.swing.JLabel lblEleccionLibros;
     private javax.swing.JLabel lblNombre;

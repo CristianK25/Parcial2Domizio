@@ -3,28 +3,31 @@
  */
 package com.example.app;
 
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
 import java.sql.Connection;
 import java.sql.SQLException;
 import util.DatabaseUtil;
 import view.Ventana;
 
 public class App {
-
+    static Connection conn;
     public static void main(String[] args) {
-        Connection conn = null;
+        
         try {
             conn = DatabaseUtil.getConnection();
             System.out.println("Conexion exitosa");
         } catch (SQLException e) {
             System.out.println("Error al conectar a la base de datos");
         }
-        FlatAtomOneDarkIJTheme.setup();
+        FlatMaterialDarkerIJTheme.setup();
         DatabaseUtil.initDatabase(conn);
-        Ventana v1 = new Ventana(conn);
-        v1.setVisible(true);
-        v1.setResizable(false);
-        v1.setLocationRelativeTo(null);
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            Ventana v1 = new Ventana(conn);
+            v1.setVisible(true);
+            v1.setResizable(false);
+            v1.setLocationRelativeTo(null);
+        });
+        
 
     }
 }

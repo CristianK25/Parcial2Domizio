@@ -4,7 +4,7 @@ import java.sql.*;
 
 @SuppressWarnings("ALL")
 public class DatabaseUtil {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/parcial_1_domizio";
+    private static final String DB_URL = "jdbc:h2:./Base de datos/parcial_1_domizio";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
 
@@ -66,7 +66,7 @@ public class DatabaseUtil {
         {"15", "Drácula", "Terror"}
     };
 
-    String sql = "INSERT IGNORE INTO libro (numero, titulo, clasificacion) VALUES (?, ?, ?)";
+    String sql = "MERGE INTO libro (numero, titulo, clasificacion) KEY(numero) VALUES (?, ?, ?)";
 
     try (PreparedStatement ps = conn.prepareStatement(sql)) {
         for (String[] libro : librosAInsertar) {
