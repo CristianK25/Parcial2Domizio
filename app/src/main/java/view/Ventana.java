@@ -5,6 +5,7 @@ import dao.LibroDAO;
 import dao.PersonaDAO;
 import dao.PrestamoDAO;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -154,6 +155,7 @@ public class Ventana extends javax.swing.JFrame {
 
         txtaPrestamos.setEditable(false);
         txtaPrestamos.setColumns(20);
+        txtaPrestamos.setForeground(new java.awt.Color(255, 255, 255));
         txtaPrestamos.setRows(5);
         scrollPanePrestamos.setViewportView(txtaPrestamos);
 
@@ -343,7 +345,6 @@ public class Ventana extends javax.swing.JFrame {
             try{
                 int dni = Integer.parseInt(input.trim());
                 mostrarPrestamos(dni);
-                this.cl.show(this.panelPrincipal,"panelMostrarPrestamos");
                 break;
             }catch(NumberFormatException e){
                 System.out.println("No ingreso un numero");
@@ -359,11 +360,11 @@ public class Ventana extends javax.swing.JFrame {
     private void mostrarPrestamos(int dni) {
         this.txtaPrestamos.setText("");
         Prestamo p = PrestamoDAO.buscarPrestamoPorDni(conn, dni);
-        // Debug adicional
-        if(p != null) {
-            System.out.println("Préstamo encontrado ID: " + p.id);
-            System.out.println("Número de libros: " + (p.librosEscritos != null ? p.librosEscritos.size() : 0));
+        if (p == null){
+            JOptionPane.showMessageDialog(null, "No existe ese prestamo");
+            return;
         }
+        this.cl.show(this.panelPrincipal,"panelMostrarPrestamos");
         this.txtaPrestamos.setText(p.toString());
     }
     
