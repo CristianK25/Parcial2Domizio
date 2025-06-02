@@ -262,6 +262,8 @@ public class Ventana extends javax.swing.JFrame {
         btnPedirPrestamos.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btnPedirPrestamos.setForeground(new java.awt.Color(255, 255, 255));
         btnPedirPrestamos.setText("Pedir Prestamos");
+        btnPedirPrestamos.setBorder(null);
+        btnPedirPrestamos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPedirPrestamos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPedirPrestamosActionPerformed(evt);
@@ -271,6 +273,8 @@ public class Ventana extends javax.swing.JFrame {
         btnMostrarPrestamos.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btnMostrarPrestamos.setForeground(new java.awt.Color(255, 255, 255));
         btnMostrarPrestamos.setText("Mostrar Prestamos");
+        btnMostrarPrestamos.setBorder(null);
+        btnMostrarPrestamos.setBorderPainted(false);
         btnMostrarPrestamos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMostrarPrestamosActionPerformed(evt);
@@ -281,17 +285,13 @@ public class Ventana extends javax.swing.JFrame {
         panelMenuPrincipal.setLayout(panelMenuPrincipalLayout);
         panelMenuPrincipalLayout.setHorizontalGroup(
             panelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuPrincipalLayout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addComponent(btnPedirPrestamos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMostrarPrestamos)
-                .addGap(50, 50, 50))
-            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
             .addGroup(panelMenuPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1)
                 .addContainerGap())
+            .addComponent(btnMostrarPrestamos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnPedirPrestamos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelMenuPrincipalLayout.setVerticalGroup(
             panelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,11 +300,11 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addGroup(panelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPedirPrestamos)
-                    .addComponent(btnMostrarPrestamos))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addGap(112, 112, 112)
+                .addComponent(btnPedirPrestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMostrarPrestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         panelPrincipal.add(panelMenuPrincipal, "panelMenuPrincipal");
